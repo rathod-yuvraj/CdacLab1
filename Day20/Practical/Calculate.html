@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate</title>
+    <style>
+        /* Optional basic styling for better layout */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate</h1>
+    <div class="container">
+
+        <div class="inpt">
+            <h1 id="h">Display Number</h1>
+            
+            <label for="num"> Enter the only numbers</label>
+            <input type="number" id="num" required> <br><br>
+            
+            
+            <button onclick="displayAndAddToTable()">Display & Add</button>
+            
+
+        </div>
+
+        <hr>
+
+        <h2>Entered Numbers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+                </tbody>
+        </table>
+
+    </div>
+    
+    <script>
+        // Store all entered numbers in an array (optional but good practice)
+        let enteredNumbers = [];
+        // Main function to display the number and add it to the table
+        function displayAndAddToTable(){
+            // 1. Get the value from the input field (ID 'num')
+            let numb = document.getElementById("num").value;
+
+            // Basic validation: Check if the input is not empty
+            if (numb === "") {
+                alert("Please enter a number.");
+                return; // Stop the function if no number is entered
+            }
+
+            // Convert the string input to a number
+            let numberValue = parseFloat(numb);
+            
+            // Add the number to our array
+            enteredNumbers.push(numberValue);
+
+            // 2. CORRECTION: Fix the typo in document.getElementById("h").innerHTML=numb;
+            // It was previously 'documnet'
+            document.getElementById("h").innerHTML = "Last Entered: " + numberValue;
+            
+            // 3. NEW FUNCTIONALITY: Add the number to the table
+            const tableBody = document.getElementById("tablebody");
+            
+            // Create a new table row element
+            const newRow = tableBody.insertRow();
+            
+            // Create a new cell (td)
+            const newCell = newRow.insertCell();
+            
+            // Set the cell's content to the entered number
+            newCell.textContent = numberValue;
+            
+            // 4. NEW FUNCTIONALITY: Clear the input field after successful entry
+            document.getElementById("num").value = "";
+
+            // Optional: Log to console
+            console.log("Number entered and added to table:", numberValue);
+        }
+
+    </script>
+</body>
+</html>
